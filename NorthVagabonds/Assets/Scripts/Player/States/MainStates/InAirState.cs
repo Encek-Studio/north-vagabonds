@@ -31,7 +31,11 @@ namespace Player
             xInput = player.InputHandler.NormInputX;
 
             if (onGround) stateMachine.ChangeState(player.IdleState);
-            else player.Core.Movement.SetVelocityX(xInput * playerData.moveSpeedInAir);
+            else 
+            {
+                player.Core.Movement.SetVelocityX(xInput * playerData.moveSpeedInAir);
+                player.Core.Movement.CheckIfShouldFlip(xInput);
+            }
         }
 
         public override void PhysicsUpdate()

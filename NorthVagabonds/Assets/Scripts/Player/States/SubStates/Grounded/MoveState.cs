@@ -4,6 +4,8 @@ namespace Player
 {
     public class MoveState : GroundedState
     {
+        private bool rollInput;
+
         public MoveState(Player player, StateMachine stateMachine, PlayerData playerData, string animationName) : base(player, stateMachine, playerData, animationName)
         {
         }
@@ -26,9 +28,20 @@ namespace Player
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+
+            rollInput = player.InputHandler.RollInput;
+
             if (xInput == 0) stateMachine.ChangeState(player.IdleState);
             else if (jumpInput) stateMachine.ChangeState(player.JumpState);
-            else player.Core.Movement.SetVelocityX(xInput * playerData.moveSpeed);
+            else if (rollInput) stateMachine.ChangeState(player.RollState);
+            else if (attackInput) stateMachine.ChangeState(player.AttackState);
+            else if (heavyAttackInput) stateMachine.ChangeState(player.HeavyAttackState);
+            else if (defenseInput) stateMachine.ChangeState(player.DefenseState);
+            else 
+            {
+                player.Core.Movement.SetVelocityX(xInput * playerData.moveSpeed);
+                player.Core.Movement.CheckIfShouldFlip(xInput);
+            }
         }
 
         public override void PhysicsUpdate()

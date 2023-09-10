@@ -17,6 +17,10 @@ namespace Player
         public MoveState MoveState {get; private set; }
         public JumpState JumpState {get; private set; }
         public InAirState InAirState {get; private set; }
+        public RollState RollState {get; private set; }
+        public AttackState AttackState {get; private set; }
+        public HeavyAttackState HeavyAttackState {get; private set; }
+        public DefenseState DefenseState {get; private set; }
         #endregion
 
         [SerializeField] private PlayerData playerData;
@@ -25,7 +29,7 @@ namespace Player
         [SerializeField] private TextMeshPro _currentStateText;
         #endregion
         
-        private void Awake() 
+        private void Awake()
         {
             Anim = GetComponent<Animator>();
             InputHandler = GetComponent<PlayerInputHandler>();
@@ -40,9 +44,13 @@ namespace Player
             MoveState = new(this, StateMachine, playerData, "move");
             JumpState = new(this, StateMachine, playerData, "inAir");
             InAirState = new(this, StateMachine, playerData, "inAir");
-
+            RollState = new(this, StateMachine, playerData, "roll");
+            AttackState = new(this, StateMachine, playerData, "attack");
+            HeavyAttackState = new(this, StateMachine, playerData, "heavyAttack");
+            DefenseState = new(this, StateMachine, playerData, "defense");
 
             StateMachine.Initialize(IdleState);
+            StateMachine.OnStateChanged += ChangeCurrentStateText; //ToDo: Delete it later!
         }
 
         private void Update() 
@@ -54,6 +62,10 @@ namespace Player
         {
             StateMachine.CurrentState.PhysicsUpdate();    
         }
+
+        #region ANIMATION TRIGGER FUNCTIONS
+        public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+        #endregion
 
         #region Temporary Functions
         public void ChangeCurrentStateText()

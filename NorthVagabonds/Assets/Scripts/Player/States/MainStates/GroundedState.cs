@@ -7,6 +7,9 @@ namespace Player
         #region Inputs
         protected int xInput;
         protected bool jumpInput;
+        protected bool attackInput;
+        protected bool heavyAttackInput;
+        protected bool defenseInput;
         #endregion
 
         protected bool onGround;
@@ -36,6 +39,9 @@ namespace Player
             base.LogicUpdate();
             xInput = player.InputHandler.NormInputX;
             jumpInput = player.InputHandler.JumpInput;
+            attackInput = player.InputHandler.AttackInput;
+            heavyAttackInput = player.InputHandler.HeavyAttackInput;
+            defenseInput = player.InputHandler.DefenseInput;
         
             if (!onGround) stateMachine.ChangeState(player.InAirState);
         }

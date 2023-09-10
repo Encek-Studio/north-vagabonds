@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec61e0fcb0535224d8f0c8d64679396f, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  moveSpeedInAir: 7.5
+  moveSpeed: 8
+  moveSpeedInAir: 6.5
   jumpPower: 20
   coyoteTime: 0.2
-  rollSpeed: 20
+  rollSpeed: 9
   rollCooldown: 1
   rollTime: 0.3

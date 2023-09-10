@@ -6,6 +6,8 @@ namespace Player
         public State CurrentState {get; private set; }
         public State PreviousState {get; private set; }
 
+        public System.Action OnStateChanged;
+
         public void Initialize(State startingState)
         {
             CurrentState = startingState;
@@ -18,6 +20,7 @@ namespace Player
             CurrentState.Exit();
             CurrentState = newState;
             CurrentState.Enter();
+            OnStateChanged?.Invoke();
         }
     }
 }
