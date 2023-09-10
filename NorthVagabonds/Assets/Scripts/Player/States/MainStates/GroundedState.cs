@@ -1,9 +1,12 @@
+using UnityEngine;
+
 namespace Player
 {
     public class GroundedState : State
     {
         #region Inputs
-
+        protected int xInput;
+        protected bool jumpInput;
         #endregion
 
         protected bool onGround;
@@ -31,6 +34,15 @@ namespace Player
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+            xInput = player.InputHandler.NormInputX;
+            jumpInput = player.InputHandler.JumpInput;
+        
+            if (!onGround) stateMachine.ChangeState(player.InAirState);
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
         }
     }
 }

@@ -52,13 +52,13 @@ namespace Core
 
         public void SetVelocityX(float velocity)
         {
-            workspace.Set(velocity, CurrentVelocity.y);
+            workspace.Set(velocity, RB.velocity.y);
             SetFinalVelocity();
         }
 
         public void SetVelocityY(float velocity)
         {
-            workspace.Set(CurrentVelocity.x, velocity);
+            workspace.Set(RB.velocity.x, velocity);
             SetFinalVelocity();
         }
 
