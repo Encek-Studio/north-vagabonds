@@ -27,11 +27,7 @@ namespace Player
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (xInput != 0) stateMachine.ChangeState(player.MoveState);
-            else if (jumpInput) stateMachine.ChangeState(player.JumpState);
-            else if (attackInput) stateMachine.ChangeState(player.AttackState);
-            else if (heavyAttackInput) stateMachine.ChangeState(player.HeavyAttackState);
-            else if (defenseInput) stateMachine.ChangeState(player.DefenseState);
+            if (xInput != 0) stateMachine.ChangeState(player.MoveState);            
         }
 
         public override void PhysicsUpdate()

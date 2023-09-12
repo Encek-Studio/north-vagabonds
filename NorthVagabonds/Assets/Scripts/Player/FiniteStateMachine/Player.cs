@@ -29,6 +29,7 @@ namespace Player
         [SerializeField] private TextMeshPro _currentStateText;
         #endregion
         
+        #region BUILT-IN FUNCTIONS
         private void Awake()
         {
             Anim = GetComponent<Animator>();
@@ -39,16 +40,7 @@ namespace Player
         private void Start() 
         {
             StateMachine = new();
-
-            IdleState = new(this, StateMachine, playerData, "idle");
-            MoveState = new(this, StateMachine, playerData, "move");
-            JumpState = new(this, StateMachine, playerData, "inAir");
-            InAirState = new(this, StateMachine, playerData, "inAir");
-            RollState = new(this, StateMachine, playerData, "roll");
-            AttackState = new(this, StateMachine, playerData, "attack");
-            HeavyAttackState = new(this, StateMachine, playerData, "heavyAttack");
-            DefenseState = new(this, StateMachine, playerData, "defense");
-
+            InitStates();
             StateMachine.Initialize(IdleState);
             StateMachine.OnStateChanged += ChangeCurrentStateText; //ToDo: Delete it later!
         }
@@ -61,6 +53,19 @@ namespace Player
         private void FixedUpdate() 
         {
             StateMachine.CurrentState.PhysicsUpdate();    
+        }
+        #endregion
+
+        public void InitStates()
+        {
+            IdleState = new(this, StateMachine, playerData, "idle");
+            MoveState = new(this, StateMachine, playerData, "move");
+            JumpState = new(this, StateMachine, playerData, "inAir");
+            InAirState = new(this, StateMachine, playerData, "inAir");
+            RollState = new(this, StateMachine, playerData, "roll");
+            AttackState = new(this, StateMachine, playerData, "attack");
+            HeavyAttackState = new(this, StateMachine, playerData, "heavyAttack");
+            DefenseState = new(this, StateMachine, playerData, "defense");
         }
 
         #region ANIMATION TRIGGER FUNCTIONS

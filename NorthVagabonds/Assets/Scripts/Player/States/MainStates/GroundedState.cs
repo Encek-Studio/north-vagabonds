@@ -10,6 +10,7 @@ namespace Player
         protected bool attackInput;
         protected bool heavyAttackInput;
         protected bool defenseInput;
+        protected bool rollInput;
         #endregion
 
         protected bool onGround;
@@ -42,8 +43,14 @@ namespace Player
             attackInput = player.InputHandler.AttackInput;
             heavyAttackInput = player.InputHandler.HeavyAttackInput;
             defenseInput = player.InputHandler.DefenseInput;
-        
+            rollInput = player.InputHandler.RollInput;
+
             if (!onGround) stateMachine.ChangeState(player.InAirState);
+            else if (jumpInput) stateMachine.ChangeState(player.JumpState);
+            else if (rollInput && player.RollState.CanRoll()) stateMachine.ChangeState(player.RollState);
+            else if (attackInput) stateMachine.ChangeState(player.AttackState);
+            else if (heavyAttackInput) stateMachine.ChangeState(player.HeavyAttackState);
+            else if (defenseInput) stateMachine.ChangeState(player.DefenseState);
         }
 
         public override void PhysicsUpdate()
