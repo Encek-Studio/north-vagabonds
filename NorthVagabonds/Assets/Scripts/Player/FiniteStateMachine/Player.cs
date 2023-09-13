@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Weapons;
 
 namespace Player
 {
@@ -24,6 +25,7 @@ namespace Player
         #endregion
 
         [SerializeField] private PlayerData playerData;
+        private Weapon weapon;
 
         #region Temporary Variables
         [SerializeField] private TextMeshPro _currentStateText;
@@ -35,12 +37,15 @@ namespace Player
             Anim = GetComponent<Animator>();
             InputHandler = GetComponent<PlayerInputHandler>();
             Core = GetComponentInChildren<Core.Core>();
+            StateMachine = new();
         }
 
         private void Start() 
         {
-            StateMachine = new();
+            weapon = transform.Find("Weapon").GetComponent<Weapon>();
+
             InitStates();
+            
             StateMachine.Initialize(IdleState);
             StateMachine.OnStateChanged += ChangeCurrentStateText; //ToDo: Delete it later!
         }
@@ -63,7 +68,7 @@ namespace Player
             JumpState = new(this, StateMachine, playerData, "inAir");
             InAirState = new(this, StateMachine, playerData, "inAir");
             RollState = new(this, StateMachine, playerData, "roll");
-            AttackState = new(this, StateMachine, playerData, "attack");
+            AttackState = new(this, StateMachine, playerData, "attack", weapon);
             HeavyAttackState = new(this, StateMachine, playerData, "heavyAttack");
             DefenseState = new(this, StateMachine, playerData, "defense");
         }

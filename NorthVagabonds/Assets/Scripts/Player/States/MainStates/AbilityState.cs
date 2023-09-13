@@ -2,6 +2,7 @@ namespace Player
 {
     public class AbilityState : State
     {
+        protected bool isAbilityDone;
         protected bool onGround;
 
         public AbilityState(Player player, StateMachine stateMachine, PlayerData playerData, string animationName) : base(player, stateMachine, playerData, animationName)
@@ -10,6 +11,7 @@ namespace Player
         public override void Enter()
         {
             base.Enter();
+            isAbilityDone = false;
         }
 
         public override void Exit()
@@ -26,9 +28,9 @@ namespace Player
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-             if (isAnimationFinished)
+             if (isAbilityDone)
              {
-                if (onGround) stateMachine.ChangeState(player.IdleState);
+                if (onGround && player.Core.Movement.CurrentVelocity.y < 0.01f) stateMachine.ChangeState(player.IdleState);
                 else stateMachine.ChangeState(player.InAirState);
              }
         }

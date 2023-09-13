@@ -4,7 +4,7 @@ namespace Player
 {
     public class RollState : AbilityState
     {
-        private float _lastRollTime;
+        private float lastRollTime;
 
         public RollState(Player player, StateMachine stateMachine, PlayerData playerData, string animationName) : base(player, stateMachine, playerData, animationName)
         {
@@ -12,7 +12,7 @@ namespace Player
 
         public override void Enter()
         {
-            _lastRollTime = Time.time;
+            lastRollTime = Time.time;
             base.Enter();
         }
 
@@ -37,6 +37,6 @@ namespace Player
             base.PhysicsUpdate();
         }
 
-        public bool CanRoll() => Time.time >= _lastRollTime + playerData.rollCooldown;
+        public bool CanRoll() => Time.time >= lastRollTime + playerData.rollCooldown;
     }
 }
