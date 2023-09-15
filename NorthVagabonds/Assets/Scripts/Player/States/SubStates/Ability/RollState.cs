@@ -28,7 +28,7 @@ namespace Player
 
         public override void LogicUpdate()
         {
-            player.Core.Movement.SetVelocityX(player.Core.Movement.FacingDirection * playerData.rollSpeed);
+            Movement?.SetVelocityX(Movement.FacingDirection * playerData.rollSpeed);
             base.LogicUpdate();
         }
 

@@ -38,11 +38,13 @@ namespace Player
             InputHandler = GetComponent<PlayerInputHandler>();
             Core = GetComponentInChildren<Core.Core>();
             StateMachine = new();
+
+            weapon = transform.Find("Weapon").GetComponent<Weapon>();
+            weapon.SetCore(Core);
         }
 
         private void Start() 
         {
-            weapon = transform.Find("Weapon").GetComponent<Weapon>();
 
             InitStates();
             

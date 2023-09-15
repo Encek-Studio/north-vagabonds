@@ -4,6 +4,7 @@ namespace Player
 {
     public class State
     {
+        protected Core.Core core;
         protected Player player;
         protected StateMachine stateMachine;
         protected PlayerData playerData;
@@ -17,6 +18,7 @@ namespace Player
             this.stateMachine = stateMachine;
             this.playerData = playerData;
             this.animationName = animationName;
+            core = player.Core;
         } 
 
         public virtual void Enter()

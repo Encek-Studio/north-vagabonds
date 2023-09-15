@@ -11,7 +11,7 @@ namespace Player
         public override void Enter()
         {
             base.Enter();
-            player.Core.Movement.SetVelocityY(playerData.jumpPower);
+            Movement?.SetVelocityY(playerData.jumpPower);
             stateMachine.ChangeState(player.InAirState);
         }
 

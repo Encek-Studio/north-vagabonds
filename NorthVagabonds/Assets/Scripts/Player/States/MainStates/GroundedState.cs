@@ -1,4 +1,4 @@
-using UnityEngine;
+using Core;
 
 namespace Player
 {
@@ -13,7 +13,20 @@ namespace Player
         protected bool rollInput;
         #endregion
 
-        protected bool onGround;
+        protected Movement Movement
+        {
+        get => movement ? movement : core.GetCoreComponent(ref movement);
+        }
+
+        private CollisionSenses CollisionSenses
+        {
+            get => collisionSenses ? collisionSenses : core.GetCoreComponent(ref collisionSenses);
+        }
+
+        private Movement movement;
+        private CollisionSenses collisionSenses;
+
+        private bool onGround;
 
         public GroundedState(Player player, StateMachine stateMachine, PlayerData playerData, string animationName) : base(player, stateMachine, playerData, animationName)
         {
@@ -32,7 +45,10 @@ namespace Player
         public override void DoChecks()
         {
             base.DoChecks();
-            onGround = player.Core.CollisionSenses.Ground;
+            if (CollisionSenses)
+            {
+                onGround = CollisionSenses.Ground;
+            }
         }
 
         public override void LogicUpdate()

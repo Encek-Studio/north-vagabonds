@@ -2,34 +2,12 @@ using UnityEngine;
 
 namespace Weapons.Components
 {
-    public class WeaponSprite : WeaponComponent 
+    public class WeaponSprite : WeaponComponent<WeaponSpriteData, AttackSprites>
     {
         private SpriteRenderer baseSpriteRenderer;
         private SpriteRenderer weaponSpriteRenderer;
-        [SerializeField] private WeaponSprites[] weaponSprites;
 
         private int currentWeaponSpriteIndex;
-
-        private void HandleBaseSpriteChange(SpriteRenderer sr)
-        {
-            if (!isAttackActive)
-            {
-                weaponSpriteRenderer.sprite = null;
-                return;
-            }
-            
-            Sprite[] currentAttackSprites = weaponSprites[weapon.CurrentAttackCounter].Sprites;
-
-            weaponSpriteRenderer.sprite = currentAttackSprites[currentWeaponSpriteIndex];
-            
-            currentWeaponSpriteIndex++;
-        }
-
-        protected override void HandleEnter()
-        {
-            base.HandleEnter();
-            currentWeaponSpriteIndex = 0;
-        }
 
         protected override void Awake()
         {
@@ -58,11 +36,26 @@ namespace Weapons.Components
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
             weapon.OnEnter -= HandleEnter;
         }
-    }
 
-    [System.Serializable]
-    public class WeaponSprites
-    {
-        [field: SerializeField] public Sprite[] Sprites { get ; private set; }
+        private void HandleBaseSpriteChange(SpriteRenderer sr)
+        {
+            if (!isAttackActive)
+            {
+                weaponSpriteRenderer.sprite = null;
+                return;
+            }
+            
+            Sprite[] currentAttackSprites = currentAttackData.Sprites;
+
+            weaponSpriteRenderer.sprite = currentAttackSprites[currentWeaponSpriteIndex];
+            
+            currentWeaponSpriteIndex++;
+        }
+
+        protected override void HandleEnter()
+        {
+            base.HandleEnter();
+            currentWeaponSpriteIndex = 0;
+        }
     }
 }

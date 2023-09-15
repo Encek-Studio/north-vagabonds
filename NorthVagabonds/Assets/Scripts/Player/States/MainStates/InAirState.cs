@@ -1,7 +1,22 @@
+using Core;
+
 namespace Player
 {
     public class InAirState : State
     {
+        protected Movement Movement
+        {
+            get => movement ?? core.GetCoreComponent(ref movement);
+        }
+
+        private CollisionSenses CollisionSenses
+        {
+            get => collisionSenses ?? core.GetCoreComponent(ref collisionSenses);
+        }
+
+        private Movement movement;
+        private CollisionSenses collisionSenses;
+
         protected int xInput;
         protected bool onGround;
 
@@ -22,7 +37,10 @@ namespace Player
         public override void DoChecks()
         {
             base.DoChecks();
-            onGround = player.Core.CollisionSenses.Ground;
+            if (CollisionSenses)
+            {
+                onGround = CollisionSenses.Ground;
+            }
         }
 
         public override void LogicUpdate()
@@ -33,8 +51,8 @@ namespace Player
             if (onGround) stateMachine.ChangeState(player.IdleState);
             else 
             {
-                player.Core.Movement.SetVelocityX(xInput * playerData.moveSpeedInAir);
-                player.Core.Movement.CheckIfShouldFlip(xInput);
+                Movement?.SetVelocityX(xInput * playerData.moveSpeedInAir);
+                Movement?.CheckIfShouldFlip(xInput);
             }
         }
 

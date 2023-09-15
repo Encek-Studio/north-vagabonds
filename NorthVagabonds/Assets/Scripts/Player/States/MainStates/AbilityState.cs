@@ -1,8 +1,17 @@
+using Core;
+
 namespace Player
 {
     public class AbilityState : State
     {
         protected bool isAbilityDone;
+
+        protected Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
+        private CollisionSenses CollisionSenses { get => collisionSenses ?? core.GetCoreComponent(ref collisionSenses); }
+
+        private Movement movement;
+        private CollisionSenses collisionSenses;
+
         protected bool onGround;
 
         public AbilityState(Player player, StateMachine stateMachine, PlayerData playerData, string animationName) : base(player, stateMachine, playerData, animationName)
@@ -22,7 +31,10 @@ namespace Player
         public override void DoChecks()
         {
             base.DoChecks();
-            onGround = player.Core.CollisionSenses.Ground;
+            if (CollisionSenses)
+            {
+                onGround = CollisionSenses.Ground;
+            }
         }
 
         public override void LogicUpdate()
@@ -30,7 +42,7 @@ namespace Player
             base.LogicUpdate();
              if (isAbilityDone)
              {
-                if (onGround && player.Core.Movement.CurrentVelocity.y < 0.01f) stateMachine.ChangeState(player.IdleState);
+                if (onGround && Movement?.CurrentVelocity.y < 0.01f) stateMachine.ChangeState(player.IdleState);
                 else stateMachine.ChangeState(player.InAirState);
              }
         }

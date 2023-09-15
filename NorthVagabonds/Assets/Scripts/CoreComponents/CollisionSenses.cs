@@ -5,9 +5,13 @@ namespace Core
 {
     public class CollisionSenses : CoreComponent
     {
+        private Movement Movement { get => movement ?? core.GetCoreComponent(ref movement); }
+
+	    private Movement movement;
+
         public Transform GroundCheck
         {
-            get => GenericNotImplementedError<Transform>.TryGet(groundCheck, Core.transform.parent.name);
+            get => GenericNotImplementedError<Transform>.TryGet(groundCheck, core.transform.parent.name);
             private set => groundCheck = value;
         }
 

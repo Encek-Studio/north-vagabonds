@@ -14,7 +14,7 @@ namespace Core
 
         private Vector2 workspace;
 
-        public override void Awake()
+        protected override void Awake()
         {
             base.Awake();
 
@@ -24,7 +24,7 @@ namespace Core
             CanSetVelocity = true;
         }
 
-        public void LogicUpdate()
+        public override void LogicUpdate()
         {
             CurrentVelocity = RB.velocity;
         }

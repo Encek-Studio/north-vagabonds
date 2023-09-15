@@ -29,8 +29,8 @@ namespace Player
             if (xInput == 0) stateMachine.ChangeState(player.IdleState);
             else
             {
-                player.Core.Movement.SetVelocityX(xInput * playerData.moveSpeed);
-                player.Core.Movement.CheckIfShouldFlip(xInput);
+                Movement?.SetVelocityX(xInput * playerData.moveSpeed);
+                Movement?.CheckIfShouldFlip(xInput);
             }
         }
 
