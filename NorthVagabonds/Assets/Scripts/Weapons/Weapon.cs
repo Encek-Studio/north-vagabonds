@@ -14,9 +14,11 @@ namespace Weapons
             get => currentAttackCounter;
             private set => currentAttackCounter = value >= numberOfAttacks ? 0 : value;
         }
+        public event Action OnEnter;
         public event Action OnExit;
+        public GameObject BaseGameObject { get ; private set; }
+        public GameObject WeaponSpriteGameObject { get; private set; }
         private Animator anim;
-        private GameObject baseGameObject;
         private AnimationEventHandler eventHandler;
 
         private int currentAttackCounter;
@@ -25,9 +27,10 @@ namespace Weapons
         #region BUILT-IN FUNCTIONS
         private void Awake() 
         {
-            baseGameObject = transform.Find("Base").gameObject;
-            anim = baseGameObject.GetComponent<Animator>();
-            eventHandler = baseGameObject.GetComponent<AnimationEventHandler>(); 
+            BaseGameObject = transform.Find("Base").gameObject;
+            WeaponSpriteGameObject = transform.Find("WeaponSprite").gameObject;
+            anim = BaseGameObject.GetComponent<Animator>();
+            eventHandler = BaseGameObject.GetComponent<AnimationEventHandler>(); 
 
             attackCounterResetTimer = new(attackCounterResetCooldown);  
         }
@@ -56,6 +59,7 @@ namespace Weapons
             attackCounterResetTimer.StopTimer();
             anim.SetBool("active", true);
             anim.SetInteger("counter", currentAttackCounter);
+            OnEnter?.Invoke();
         }
 
         private void Exit()
