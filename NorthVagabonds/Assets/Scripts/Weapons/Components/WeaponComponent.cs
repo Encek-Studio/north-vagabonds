@@ -17,8 +17,10 @@ namespace Weapons.Components
             eventHandler = GetComponentInChildren<AnimationEventHandler>();
         }
 
-        protected virtual void HandleEnter() => isAttackActive = true;
-        protected virtual void HandleExit() => isAttackActive = false;
+        protected virtual void Start()
+        {
+            
+        }
 
         protected virtual void OnEnable() 
         {
@@ -31,6 +33,9 @@ namespace Weapons.Components
             weapon.OnEnter -= HandleEnter;
             weapon.OnExit -= HandleExit;    
         }
+     
+        protected virtual void HandleEnter() => isAttackActive = true;
+        protected virtual void HandleExit() => isAttackActive = false;
     }
 
     public abstract class WeaponComponent<T1, T2> : WeaponComponent where T1 : ComponentData<T2> where T2 : AttackData

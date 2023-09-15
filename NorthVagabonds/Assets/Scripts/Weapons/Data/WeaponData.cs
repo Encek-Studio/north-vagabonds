@@ -17,10 +17,14 @@ namespace Weapons
             return ComponentDatas.OfType<T>().FirstOrDefault();
         }
 
-        [ContextMenu("Add Sprite Data")]
-        private void AddSpriteData() => ComponentDatas.Add(new WeaponSpriteData());
-        
-        [ContextMenu("Add Movement Data")]
-        private void AddMovementData() => ComponentDatas.Add(new MovementData());
+        public void AddData(ComponentData data)
+        {
+            if (ComponentDatas.FirstOrDefault(t => t.GetType() == data.GetType()) != null) 
+            {
+                Debug.LogWarning($"{this.name} already contains a {data.GetType().Name}");
+                return;
+            }
+            ComponentDatas.Add(data);
+        }
     }
 }

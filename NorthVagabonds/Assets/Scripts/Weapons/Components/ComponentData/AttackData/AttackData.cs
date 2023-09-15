@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Weapons.Components
 {
     [System.Serializable]
