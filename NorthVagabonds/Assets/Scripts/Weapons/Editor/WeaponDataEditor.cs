@@ -15,6 +15,9 @@ namespace Weapons
         private static List<Type> dataComponentTypes = new();
         private WeaponData data;
 
+        private bool showForceUpdateButtons;
+        private bool showAddComponentButtons;
+
         private void OnEnable() 
         {
             data = target as WeaponData;    
@@ -24,15 +27,49 @@ namespace Weapons
         {
             base.OnInspectorGUI();
 
-            foreach (var dataComponentType in dataComponentTypes)
+            if (GUILayout.Button("Set Number of Attacks"))
             {
-                if (GUILayout.Button(dataComponentType.Name))
+                foreach (var item in data.ComponentDatas)
                 {
-                    ComponentData component = Activator.CreateInstance(dataComponentType) as ComponentData;
-                    
-                    if (component == null) return;
+                    item.InitializeAttackData(data.NumberOfAttacks);
+                }
+            }
 
-                    data.AddData(component);
+            showAddComponentButtons = EditorGUILayout.Foldout(showAddComponentButtons, "Add Components");
+            
+            if (showAddComponentButtons)
+            {
+                foreach (var dataComponentType in dataComponentTypes)
+                {
+                    if (GUILayout.Button(dataComponentType.Name))
+                    {
+                        if (Activator.CreateInstance(dataComponentType) is not ComponentData component) return;
+
+                        component.InitializeAttackData(data.NumberOfAttacks);
+
+                        data.AddData(component);
+                    }
+                }
+            }
+
+            showForceUpdateButtons = EditorGUILayout.Foldout(showForceUpdateButtons, "Force Update Component Names");
+
+            if (showForceUpdateButtons)
+            {
+                if (GUILayout.Button("Force Update Component Names"))
+                {
+                    foreach (var item in data.ComponentDatas)
+                    {
+                        item.SetComponentName();
+                    }
+                }
+
+                if (GUILayout.Button("Force Update Attack Names"))
+                {
+                    foreach (var item in data.ComponentDatas)
+                    {
+                        item.SetAttackDataNames();
+                    }
                 }
             }
         }

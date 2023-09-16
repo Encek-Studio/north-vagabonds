@@ -6,9 +6,9 @@ namespace Weapons.Components
 {
     public class ActionHitbox : WeaponComponent<ActionHitboxData, AttackActionHitbox>
     {
-        private event Action<Collider2D[]> OnDetectedCollider2D;
+        public event Action<Collider2D[]> OnDetectedCollider2D;
 
-        private CoreComponent<Core.Movement> movement;
+        private CoreComp<Core.Movement> movement;
 
         private Vector2 offset;
         private Collider2D[] detected;
@@ -33,8 +33,8 @@ namespace Weapons.Components
         private void HandleAttackAction()
         {
             offset.Set(
-                transform.position.x + (currentAttackData.HitBox.x * movement.Component.FacingDirection),
-                transform.position.y + currentAttackData.HitBox.y
+                transform.position.x + (currentAttackData.HitBox.center.x * movement.Component.FacingDirection),
+                transform.position.y + currentAttackData.HitBox.center.y
             );
 
             detected = Physics2D.OverlapBoxAll(offset, currentAttackData.HitBox.size, 0f, data.DetectableLayers);
@@ -42,11 +42,6 @@ namespace Weapons.Components
             if(detected.Length == 0) return;
 
             OnDetectedCollider2D?.Invoke(detected);
-
-            foreach(var item in detected)
-            {
-                Debug.Log(item.name);
-            }
         }
 
         private void OnDrawGizmos() 
