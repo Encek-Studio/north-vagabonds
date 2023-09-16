@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4730498900171552715}
   - component: {fileID: 7800868916288719663}
-  - component: {fileID: 9036361750990518}
+  - component: {fileID: 5973300304482712681}
   m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
@@ -166,9 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8adf5fad047ef71459c64a507054090d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfAttacks: 3
   attackCounterResetCooldown: 2
---- !u!114 &9036361750990518
+--- !u!114 &5973300304482712681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,10 +176,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8133740426299673267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f189aeb3a096e443812e037b9e5bc5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 584cb1319446d344fab67c3f77d502a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSprites: []
+  weapon: {fileID: 7800868916288719663}
+  data: {fileID: 11400000, guid: 947f86fa897000846a1b27c637e8b185, type: 2}
 --- !u!1 &8802510730020157076
 GameObject:
   m_ObjectHideFlags: 0

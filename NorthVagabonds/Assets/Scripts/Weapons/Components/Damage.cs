@@ -10,18 +10,18 @@ namespace Weapons.Components
         protected override void Awake() 
         {
             base.Awake();
-            hitbox = GetComponent<ActionHitbox>();
         }
 
-        protected override void OnEnable() 
+        protected override void Start() 
         {
-            base.OnEnable();
+            base.Start();
+            hitbox = GetComponent<ActionHitbox>();
             hitbox.OnDetectedCollider2D += HandleDetectedCollider2D;
         }
 
-        protected override void OnDisable() 
+        protected override void OnDestroy() 
         {
-            base.OnDisable();
+            base.OnDestroy();
             hitbox.OnDetectedCollider2D -= HandleDetectedCollider2D;
         }
 

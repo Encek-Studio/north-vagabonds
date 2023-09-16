@@ -15,18 +15,14 @@ namespace Weapons.Components
 
         protected override void Start()
         {
+            base.Start();
             movement = new(Core);
-        }
-
-        protected override void OnEnable() 
-        {
-            base.OnEnable();
             eventHandler.OnAttackAction += HandleAttackAction;
         }
 
-        protected override void OnDisable() 
+        protected override void OnDestroy() 
         {
-            base.OnDisable();
+            base.OnDestroy();
             eventHandler.OnAttackAction -= HandleAttackAction;
         }
 

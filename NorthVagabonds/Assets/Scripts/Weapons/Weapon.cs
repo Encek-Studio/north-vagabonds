@@ -6,7 +6,8 @@ namespace Weapons
 {
     public class Weapon : MonoBehaviour 
     {
-        [field: SerializeField] public WeaponData Data { get; private set; }
+        public WeaponData Data { get; private set; }
+        
         [SerializeField] private float attackCounterResetCooldown;
         public int CurrentAttackCounter
         {
@@ -78,5 +79,7 @@ namespace Weapons
             CurrentAttackCounter = 0;
             Debug.Log("Reset Attack Counter");
         }
+
+        public void SetData(WeaponData data) => Data = data;
     }
 }

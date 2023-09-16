@@ -19,16 +19,11 @@ namespace Weapons.Components
 
         protected virtual void Start()
         {
-            
-        }
-
-        protected virtual void OnEnable() 
-        {
             weapon.OnEnter += HandleEnter;
-            weapon.OnExit += HandleExit;    
+            weapon.OnExit += HandleExit;   
         }
         
-        protected virtual void OnDisable() 
+        protected virtual void OnDestroy() 
         {
             weapon.OnEnter -= HandleEnter;
             weapon.OnExit -= HandleExit;    
@@ -36,6 +31,8 @@ namespace Weapons.Components
      
         protected virtual void HandleEnter() => isAttackActive = true;
         protected virtual void HandleExit() => isAttackActive = false;
+
+        public virtual void Init(){}
     }
 
     public abstract class WeaponComponent<T1, T2> : WeaponComponent where T1 : ComponentData<T2> where T2 : AttackData
@@ -43,9 +40,9 @@ namespace Weapons.Components
         protected T1 data;
         protected T2 currentAttackData;
 
-        protected override void Awake()
+        public override void Init()
         {
-            base.Awake();
+            base.Init();
 
             data = weapon.Data.GetData<T1>();
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -25,6 +26,11 @@ namespace Weapons
                 return;
             }
             ComponentDatas.Add(data);
+        }
+
+        public List<Type> GetAllDependencies()
+        {
+            return ComponentDatas.Select(component => component.ComponentDependency).ToList();
         }
     }
 }
