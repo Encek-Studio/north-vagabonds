@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public class KnockBackReceiver : CoreComponent, IKnockBackable
+    public class KnockbackReceiver : CoreComponent, IKnockbackable
     {
         [SerializeField] private float maxKnockBackTime = 0.2f;
 
@@ -26,7 +26,7 @@ namespace Core
             CheckKnockBack();
         }
 
-        public void KnockBack(Vector2 angle, float strength, int direction)
+        public void Knockback(Vector2 angle, float strength, int direction)
         {
             movement.Component?.SetVelocity(strength, angle, direction);
             movement.Component.CanSetVelocity = false;

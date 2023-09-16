@@ -4,7 +4,7 @@ namespace Weapons.Components
 {
     public class WeaponSpriteData : ComponentData<AttackSprites>
     {
-        public WeaponSpriteData()
+        protected override void SetComponentDependency()
         {
             ComponentDependency = typeof(WeaponSprite);
         }

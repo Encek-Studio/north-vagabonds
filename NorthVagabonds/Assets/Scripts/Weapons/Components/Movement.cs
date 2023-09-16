@@ -1,3 +1,4 @@
+using Core;
 using UnityEngine;
 
 namespace Weapons.Components
@@ -5,12 +6,13 @@ namespace Weapons.Components
     public class Movement : WeaponComponent<MovementData, AttackMovement>
     {
 
-        private Core.Movement coreMovement;
-        private Core.Movement CoreMovement => coreMovement ? coreMovement : Core.GetCoreComponent(ref coreMovement);
+        private CoreComp<Core.Movement> movement;
 
         protected override void Start() 
         {
             base.Start();
+
+            movement = new(Core);
 
             eventHandler.OnStartMovement += HandleStartMovement;
             eventHandler.OnStopMovement += HandleStopMovement;
@@ -26,12 +28,12 @@ namespace Weapons.Components
 
         private void HandleStartMovement()
         {
-            CoreMovement.SetVelocity(currentAttackData.Velocity, currentAttackData.Direction, coreMovement.FacingDirection);
+            movement.Component.SetVelocity(currentAttackData.Velocity, currentAttackData.Direction, movement.Component.FacingDirection);
         }
 
         private void HandleStopMovement()
         {
-            CoreMovement.SetVelocityZero();
+            movement.Component.SetVelocityZero();
         }
     }
 }

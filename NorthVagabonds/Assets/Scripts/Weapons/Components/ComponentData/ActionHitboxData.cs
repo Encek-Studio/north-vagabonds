@@ -7,7 +7,7 @@ namespace Weapons.Components
     {
         [field: SerializeField] public LayerMask DetectableLayers { get; private set; } 
         
-        public ActionHitboxData()
+        protected override void SetComponentDependency()
         {
             ComponentDependency = typeof(ActionHitbox);
         }

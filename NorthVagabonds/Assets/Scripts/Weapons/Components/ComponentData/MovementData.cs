@@ -4,7 +4,7 @@ namespace Weapons.Components
 {
     public class MovementData : ComponentData<AttackMovement>
     {
-        public MovementData()
+        protected override void SetComponentDependency()
         {
             ComponentDependency = typeof(Movement);
         }

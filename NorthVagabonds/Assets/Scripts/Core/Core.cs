@@ -8,10 +8,6 @@ namespace Core
     {
         private readonly List<CoreComponent> CoreComponents = new();
 
-        private void Awake()
-        {
-        }
-
         public void LogicUpdate()
         {
             foreach (CoreComponent component in CoreComponents)
