@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public class DamageReceiver : CoreComponent, IDamageable
+    public class PoiseDamageReceiver : CoreComponent, IPoiseDamageable
     {
          private Stats stats;
     
@@ -13,9 +13,10 @@ namespace Core
             stats = core.GetCoreComponent<Stats>();
         }
         
-        public void Damage(float amount) {
-            Debug.Log(core.transform.parent.name + " Damaged!");
-            stats.Health.Decrease(amount);
+        public void Damage(float amount) 
+        {
+            Debug.Log(core.transform.parent.name + " Poise Damaged!");
+            stats.Poise.Decrease(amount);
         }
     }
 }

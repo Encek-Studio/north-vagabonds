@@ -19,6 +19,7 @@ MonoBehaviour:
   - rid: 3990962599049035779
   - rid: 3990962599049035781
   - rid: 3990962602814210048
+  - rid: 3990962699331436544
   references:
     version: 2
     RefIds:
@@ -119,3 +120,14 @@ MonoBehaviour:
         - name: Attack 3
           <Angle>k__BackingField: {x: 1, y: 5}
           <Strength>k__BackingField: 12
+    - rid: 3990962699331436544
+      type: {class: PoiseDamageData, ns: Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: PoiseDamageData
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 25
+        - name: Attack 2
+          <Amount>k__BackingField: 25
+        - name: Attack 3
+          <Amount>k__BackingField: 25

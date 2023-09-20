@@ -74,11 +74,7 @@ namespace Weapons
 
         public void SetCore(Core.Core core) => Core = core;
 
-        private void ResetAttackCounter() 
-        {
-            CurrentAttackCounter = 0;
-            Debug.Log("Reset Attack Counter");
-        }
+        private void ResetAttackCounter() => CurrentAttackCounter = 0;
 
         public void SetData(WeaponData data) => Data = data;
     }
