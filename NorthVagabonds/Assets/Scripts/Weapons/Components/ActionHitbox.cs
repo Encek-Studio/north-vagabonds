@@ -40,16 +40,16 @@ namespace Weapons.Components
             OnDetectedCollider2D?.Invoke(detected);
         }
 
-        private void OnDrawGizmos() 
-        {
-            if (data == null) return;
+        // private void OnDrawGizmos() 
+        // {
+        //     if (data == null) return;
 
-            foreach(var item in data.AttackData)
-            {
-                if (!item.Debug) continue;
+        //     foreach(var item in data.AttackData)
+        //     {
+        //         if (!item.Debug) continue;
 
-                Gizmos.DrawWireCube(transform.position + (Vector3)item.HitBox.center, item.HitBox.size);
-            }
-        }
+        //         Gizmos.DrawWireCube(transform.position + (Vector3)item.HitBox.center, item.HitBox.size);
+        //     }
+        // }
     }
 }

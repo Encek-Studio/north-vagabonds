@@ -4,10 +4,10 @@ namespace Core
 {
     public class KnockbackReceiver : CoreComponent, IKnockbackable
     {
-        [SerializeField] private float maxKnockBackTime = 0.2f;
+        [SerializeField] private float maxKnockbackTime = 0.2f;
 
-        private bool isKnockBackActive;
-        private float knockBackStartTime;
+        private bool isKnockbackActive;
+        private float knockbackStartTime;
 
         private CoreComp<Movement> movement;
         private CoreComp<CollisionSenses> collisionSenses;
@@ -23,25 +23,26 @@ namespace Core
 
         public override void LogicUpdate()
         {
-            CheckKnockBack();
+            CheckKnockback();
         }
 
         public void Knockback(Vector2 angle, float strength, int direction)
         {
             movement.Component?.SetVelocity(strength, angle, direction);
             movement.Component.CanSetVelocity = false;
-            isKnockBackActive = true;
-            knockBackStartTime = Time.time;
+            isKnockbackActive = true;
+            knockbackStartTime = Time.time;
         }
 
-        private void CheckKnockBack()
+        private void CheckKnockback()
         {
-            if (isKnockBackActive
+            if (isKnockbackActive
                 && ((movement.Component?.CurrentVelocity.y <= 0.01f && collisionSenses.Component.Ground)
-                || Time.time >= knockBackStartTime + maxKnockBackTime)
+                || Time.time >= knockbackStartTime + maxKnockbackTime)
                )
             {
-                isKnockBackActive = false;
+                Debug.Log(collisionSenses.Component.Ground);
+                isKnockbackActive = false;
                 movement.Component.CanSetVelocity = true;
             }
         }

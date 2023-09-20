@@ -55,6 +55,7 @@ namespace Player
         private void Update() 
         {
             StateMachine.CurrentState.LogicUpdate();
+            Core.LogicUpdate();
         }
 
         private void FixedUpdate() 
