@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace Weapons.Components
@@ -9,6 +10,8 @@ namespace Weapons.Components
 
         private int currentWeaponSpriteIndex;
 
+        private Sprite[] currentPhaseSprites;
+
         protected override void Start()
         {
             base.Start();
@@ -18,6 +21,8 @@ namespace Weapons.Components
 
             data = weapon.Data.GetData<WeaponSpriteData>();
             baseSpriteRenderer.RegisterSpriteChangeCallback(HandleBaseSpriteChange);
+
+            eventHandler.OnEnterAttackPhase += HandleEnterAttackPhase;
         }
 
         protected override void OnDestroy() 
@@ -25,6 +30,14 @@ namespace Weapons.Components
             base.OnDestroy();
 
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
+            eventHandler.OnEnterAttackPhase -= HandleEnterAttackPhase;
+        }
+
+        private void HandleEnterAttackPhase(AttackPhases phase)
+        {
+            currentWeaponSpriteIndex = 0;
+            
+            currentPhaseSprites = currentAttackData.PhaseSprites.FirstOrDefault(data => data.Phase == phase).Sprites;
         }
 
         private void HandleBaseSpriteChange(SpriteRenderer sr)
@@ -35,9 +48,7 @@ namespace Weapons.Components
                 return;
             }
             
-            Sprite[] currentAttackSprites = currentAttackData.Sprites;
-
-            weaponSpriteRenderer.sprite = currentAttackSprites[currentWeaponSpriteIndex];
+            weaponSpriteRenderer.sprite = currentPhaseSprites[currentWeaponSpriteIndex];
             
             currentWeaponSpriteIndex++;
         }

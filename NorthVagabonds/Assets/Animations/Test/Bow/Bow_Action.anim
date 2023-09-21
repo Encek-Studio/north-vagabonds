@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword_Attack_2
+  m_Name: Bow_Action
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,15 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 159056994, guid: a0b2ff46af1467344856455222e331ef, type: 3}
+      value: {fileID: 566902455, guid: 4857ae57ea310944a9f602596adec043, type: 3}
+    - time: 0.13333334
+      value: {fileID: 348476460, guid: 4857ae57ea310944a9f602596adec043, type: 3}
     - time: 0.2
-      value: {fileID: 751591508, guid: a0b2ff46af1467344856455222e331ef, type: 3}
+      value: {fileID: 1197884206, guid: 4857ae57ea310944a9f602596adec043, type: 3}
     - time: 0.26666668
-      value: {fileID: 144463381, guid: a0b2ff46af1467344856455222e331ef, type: 3}
-    - time: 0.4
-      value: {fileID: 762260440, guid: a0b2ff46af1467344856455222e331ef, type: 3}
-    - time: 0.46666667
-      value: {fileID: 920059597, guid: a0b2ff46af1467344856455222e331ef, type: 3}
+      value: {fileID: 2053868863, guid: 4857ae57ea310944a9f602596adec043, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -52,17 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 159056994, guid: a0b2ff46af1467344856455222e331ef, type: 3}
-    - {fileID: 751591508, guid: a0b2ff46af1467344856455222e331ef, type: 3}
-    - {fileID: 144463381, guid: a0b2ff46af1467344856455222e331ef, type: 3}
-    - {fileID: 762260440, guid: a0b2ff46af1467344856455222e331ef, type: 3}
-    - {fileID: 920059597, guid: a0b2ff46af1467344856455222e331ef, type: 3}
+    - {fileID: 566902455, guid: 4857ae57ea310944a9f602596adec043, type: 3}
+    - {fileID: 348476460, guid: 4857ae57ea310944a9f602596adec043, type: 3}
+    - {fileID: 1197884206, guid: 4857ae57ea310944a9f602596adec043, type: 3}
+    - {fileID: 2053868863, guid: 4857ae57ea310944a9f602596adec043, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.53333336
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -83,34 +80,13 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: StopMovementTrigger
+    functionName: EnterAttackPhase
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 2
     messageOptions: 0
-  - time: 0.2
-    functionName: StartMovementTrigger
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.2
-    functionName: AttackActionTrigger
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.4
-    functionName: StopMovementTrigger
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.53333336
+  - time: 0.33333334
     functionName: AnimationFinishedTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -9,6 +9,7 @@ namespace Weapons
     [CreateAssetMenu(fileName = "WeaponData_", menuName = "Data/Weapon Data/Basic Weapon Data", order = 0)]
     public class WeaponData : ScriptableObject 
     {
+        [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; private set; }
         [field: SerializeField] public int NumberOfAttacks { get; private set; }
 
         [field: SerializeReference] public List<ComponentData> ComponentDatas { get; private set; }

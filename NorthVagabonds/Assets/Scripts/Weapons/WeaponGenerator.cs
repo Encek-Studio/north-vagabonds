@@ -14,9 +14,11 @@ namespace Weapons
         private List<WeaponComponent> componentsAlreadyOnWeapon = new();
         private List<WeaponComponent> componentsAddedToWeapon = new();
         private List<Type> componentDependencies = new();
+        private Animator anim;
 
         private void Start() 
         {
+            anim = GetComponentInChildren<Animator>();
             GenerateWeapon(data);
         }
 
@@ -49,6 +51,8 @@ namespace Weapons
             {
                 Destroy(weaponComponent);
             }
+
+            anim.runtimeAnimatorController = data.AnimatorController;
         }
     }
 }
